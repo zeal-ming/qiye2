@@ -1,0 +1,162 @@
+{include file="public/header"}
+<style>
+    input[type='radio']{
+        opacity: 1;
+        position: relative;
+        left: 3px;
+    }
+</style>
+    <div class="main-container container-fluid">
+        <div class="page-container">
+                        <!-- Page Sidebar -->
+            <div class="page-sidebar" id="sidebar">
+                <!-- Page Sidebar Header-->
+                <div class="sidebar-header-wrapper">
+                    <input class="searchinput" type="text">
+                    <i class="searchicon fa fa-search"></i>
+                    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+                </div>
+                <!-- /Page Sidebar Header -->
+                 <!-- Sidebar Menu -->
+                {include file="public/menu"}
+                <!-- /Sidebar Menu -->
+            </div>
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <a href="{:url('article/lst')}">文章</a>
+                    </li>
+                                        <li>
+                        <a href="{:url('article/lst')}">文章管理</a>
+                    </li>
+                                        <li class="active">添加文章</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">新增文章</span>
+            </div>
+            <div class="widget-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" enctype="multipart/form-data" action="{:url('article/update')}" method="post">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label no-padding-right">标题</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="username" value="{$article.title}" name="title"  required="" type="text">
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="enname" class="col-sm-2 control-label no-padding-right">作者</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="enname" value="{$article.author}" name="author"  required="" type="text">
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                            <div class="form-group">
+                            <label class="col-sm-2 control-label no-padding-right">是否推荐</label>
+                            <div class="col-sm-6">
+                                
+                                <input  id="enname" placeholder="" name="rec" {if condition="$article.rec eq 1"}checked="checked"{/if} value="1" type="radio">
+                                <span>推荐</span>
+                                <input  id="enname" placeholder="" name="rec" {if condition="$article.rec eq 0"}checked="checked"{/if} value="0" type="radio">
+                                <span>不推荐</span>
+                            </div>
+                            </div>
+                        <div class="form-group">
+                            <label for="enname" class="col-sm-2 control-label no-padding-right">所属栏目</label>
+                            <div class="col-sm-6">
+
+                                <select name="cateid" style="width: 100%;" id="pid">
+                                    <option value="0" selected="selected">顶级权限</option>
+                                    {volist name="cates" id="vo"}
+                                    <option value="{$vo.id}" {if condition="$article.cateid eq $vo.id"} selected="selected" {/if}>{$vo.catename}</option>
+                                    {/volist}
+                                </select>
+                             </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="value" class="col-sm-2 control-label no-padding-right">关键字</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="value" value="{$article.keywords}" name="keywords" required="" type="text">
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="value" class="col-sm-2 control-label no-padding-right">描述</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="value" value="{$article.desc}" name="desc" required="" type="text">
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="sort" class="col-sm-2 control-label no-padding-right">内容</label>
+                            <div class="col-sm-6">
+                                 <!-- 加载编辑器的容器 -->
+                            <script id="container" name="content" type="text/plain">
+                                {$article.content}
+                            </script>
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="file1" class="col-sm-2 control-label no-padding-right">缩略图</label>
+                            <div class="col-sm-6">
+                                
+                                <img src="/{$article.thumb}" style="width: 60px; height: 30px;" alt="暂无缩略图" id="file1">
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="file" class="col-sm-2 control-label no-padding-right">重新上传图片</label>
+                            <div class="col-sm-6">
+                                <input class="form-control " id="sort" name="image"  type="file">
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <input type="hidden" name="id" value="{$article.id}"/>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">保存信息</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>  
+    </div>
+
+        <!--Basic Scripts-->
+   {include file="public/base_js"}
+    
+    <!-- ueditor的使用 -->
+   <!-- 配置文件 -->
+    <script type="text/javascript" src="__STATIC__/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="__STATIC__/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+    </script>
+</body></html>

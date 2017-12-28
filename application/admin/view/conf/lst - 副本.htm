@@ -1,0 +1,112 @@
+{include file="public/header"}
+<style>
+input[type=checkbox], input[type=radio] {
+    opacity: 1;
+    position: relative;
+    left: 0;
+    z-index: 12;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+</style>
+    <div class="main-container container-fluid">
+        <div class="page-container">
+                        <!-- Page Sidebar -->
+            <div class="page-sidebar" id="sidebar">
+                <!-- Page Sidebar Header-->
+                <div class="sidebar-header-wrapper">
+                    <input class="searchinput" type="text">
+                    <i class="searchicon fa fa-search"></i>
+                    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+                </div>
+                <!-- /Page Sidebar Header -->
+                 <!-- Sidebar Menu -->
+                {include file="public/menu"}
+                <!-- /Sidebar Menu -->
+            </div>
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <a href="{:url('conf/lst')}">系统</a>
+                    </li>
+                                        <li>
+                        <a href="{:url('conf/lst')}">网站设置</a>
+                    </li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">新增配置</span>
+            </div>
+            <div class="widget-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" action="{:url('conf/conf')}" method="post">
+                    {volist name="confs" id="vo"}
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label no-padding-right">{$vo.cnname}</label>
+                            <div class="col-sm-6">
+                            {if condition="$vo.type eq 1"}
+                                <input class="form-control" placeholder="" value="{$vo.value}" name="{$vo.enname}" required="" type="text">
+                            {elseif condition="$vo.type eq 2"/}
+                                <textarea name="{$vo.enname}" value="{$vo.value}" style="width: 520px;height: 50px">
+                                {$vo.value}
+                                </textarea>
+                                
+                            {elseif condition="($vo.type == 3)"/}
+                                {volist name="vo.values" id="vo2"}
+                                <span>{$vo2}</span>
+                                <input type="radio" class="colored-success" name="{$vo.enname}" value="{$vo2}" {if condition="$vo.value eq $vo2"} checked="checked" {/if}>     
+                                {/volist}
+                            {elseif condition="($vo.type == 4)"/}
+                                {volist name="vo.values" id="vo2"}
+                                <input type="checkbox"  name="{$vo.enname}" value="{$vo2}" {if condition="$vo.value eq $vo2"} checked="checked" {/if}>
+                                <span>{$vo2}</span>
+                                {/volist}
+                            {elseif condition="($vo.type == 5)"/}
+                                <select name="{$vo.enname}">
+                                {volist name="vo.values" id="vo2"}
+                                <option value="{$vo2}" {if condition="$vo.value eq $vo2"} selected="selected" {/if}>{$vo2}</option>
+                                {/volist}
+                                </select>
+                            {/if}
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                    {/volist}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">保存信息</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+        </div>  
+    </div>
+
+        <!--Basic Scripts-->
+   {include file="public/base_js"}
+    
+
+
+</body></html>

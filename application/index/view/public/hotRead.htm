@@ -1,0 +1,13 @@
+<ul id="ulHot">
+    {volist name="hotArtcles" id="vo"}
+    <li style="border-bottom:dashed 1px #ccc;height:70px; margin-bottom:15px;">
+        <div style="float:left;width:85px;height:55px; overflow:hidden;"><a href="{:url('article/detail',['id'=>$vo.id])}" target="_blank">
+        <img src="http://qiye2.local/{$vo.thumb}" width="83" title="{$vo.title}" /></a></div>
+        <div style="float:right;width:145px;height:52px; overflow:hidden;">
+        <a href="{:url('article/detail',['id'=>$vo.id])}" target="_blank" title="{$vo.title}">
+            {$vo.title}
+        </a>
+        </div>
+    </li>
+   {/volist}
+</ul>

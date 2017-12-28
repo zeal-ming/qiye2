@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<title>{$sitename}</title>
+<meta name="description" content="{$sitename}" />
+<meta name="keywords" content="{$sitename}" />
+<link rel="stylesheet" type="text/css" media="all" href="__STATIC__/home/style/style.css" />
+<link rel="stylesheet" href="__STATIC__/home/style/pagenavi-css.css" type="text/css" media="all" />
+<link rel="stylesheet" href="__STATIC__/home/style/votestyles.css" type="text/css" />
+<link rel="stylesheet" href="__STATIC__/home/style/voteitup.css" type="text/css" />
+<link rel="stylesheet" type="text/css" media="all" href="__STATIC__/home/style/style.css" />       
+</head>
+
+<body class="xh_body">
+
+<div id="mask" class="mask" onclick="CloseMask()"></div> 
+
+{include file="public/menu"/}
+<div id="xh_wrapper">
+       
+<input type="hidden" id="hdUrlFocus" />
+    <div class="xh_h_show">
+        <div class="xh_h_show_in">
+        <div id="zSlider">
+            <div id="picshow">
+    <div id="picshow_img">
+        <ul>
+        {volist name="showPics" id="vo"}
+<li style="display: list-item;"><a href="{:url('article/detail',['artid'=>$vo.id])}" target="_blank">
+                <img src="/{$vo.thumb}" alt="{$vo.title}"></a></li>
+        {/volist}
+        </ul>
+    </div>
+</div>
+<div id="select_btn">
+    <ul>
+        <li class="current"></li><li class=""></li><li class=""></li><li class=""></li>
+    </ul>
+</div>
+            <div class="focus-bg-title"><div id="focus-left" class="arrow-left" onmouseover="IFocuse(this,true)" onmouseout="IFocuse(this,false)"></div>
+            <div id="focus-center" class="focus-title">
+            <div style="float:left;width:580px;padding-left:10px;font-size:18px;" id="focus-tl-s"></div>
+            <div style="float:right;width:200px;"></div>
+            </div>
+            <div id="focus-right" class="arrow-right"></div></div>
+            </div>
+            <div id="picshow_right">
+      <a href="__STATIC__/home/life/416.html" target="_blank">
+    <img src="__STATIC__/home/images/1-140206160415Y6.jpg" alt="COACH再度携手王力宏 踩单车演" width="255px" height="420px"></a>
+   
+            <div id="picshow_right_cover" onclick="goanewurl()" style="cursor:pointer;position:absolute;top:495px;font-size:14px;width:213px;height:45px;line-height:45px;padding-left:42px;color:#ffffff;zoom:1;background-image:url(./images/focus-left-bg.png); background-repeat:no-repeat; background-color:#01A1ED;"></div>
+            </div>
+        </div>
+    </div>
+    <div id="xh_container">
+    <a name="new"></a>
+        <div id="xh_content" style="padding-right:10px;">
+            <div class="xh_area_h_3">
+                <div class="xh_area_title">
+                    <a href="javascript:" class="t">New 最近更新</a> 
+                    <span class="r">
+                    {volist name="recIndexCates" id="vo"}
+                        <a href="http://qiye2.local/index/{if condition="$vo['type'] eq 1"}art_list{elseif condition="$vo['type'] eq 3"/}img_list{else/}page{/if}/index/cateid/{$vo.id}">{$vo.catename}</a>
+                    {/volist}
+                     </span>
+                </div>
+                <br>
+                
+    {volist name="articles" id="vo"}      
+    <div class="xh_post_h_3 ofh">
+        <div class="xh_265x265">
+            <a target="_blank" href="{:url('article/detail',['artid'=>$vo.id])}" title="{$vo.title}">
+                <img src="http://qiye2.local/{$vo.thumb}" alt="{$vo.title}" height="240" width="400"></a>
+                </div>
+        <div class="r ofh">
+            <h2 class="xh_post_h_3_title ofh">
+                <a target="_blank" href="{:url('article/detail',['artid'=>$vo.id])}" title="{$vo.title}">{$vo.title}</a>
+            </h2>
+            <span class="time">{$vo.create_time}</span>
+            <div class="xh_post_h_3_entry ofh">
+                {$vo.desc}
+            </div>
+            <div class="b">
+                 <span title="2人赞" class="xh_love">
+                     <span class="textcontainer">
+                        <span>{$vo.zan}</span>
+                     </span> 
+                 <span class="bartext"></span></span>
+                  <span title="119人浏览" class="xh_views">{$vo.click}</span>
+            </div>
+        </div>
+        <span class="cat"><span style="color: white;" title="{$vo.catename}"
+            rel="category tag">{$vo.catename}</span>
+        </span>
+    </div>
+    {/volist}
+
+     </div>
+        </div>
+        <div id="xh_sidebar">
+
+         <div class="widget">
+
+<div style="background: url('/static/home/images/hots_bg.png') no-repeat scroll 0 0 transparent;width:250px;height:52px;margin-bottom:15px;">
+</div>
+
+{include file="public/hotRead"}
+        </div>
+            
+            <div class="widget portrait">
+    <div>
+        <div class="textwidget">
+            <a href="__STATIC__/home/images/tougao.html"><img src="__STATIC__/home/style/images/tg.jpg" alt="投稿"></a><br><br>          
+        </div>
+    </div>
+</div>
+            <div class="widget links">
+                <h3>
+                    友情链接</h3>
+                <ul>
+                {volist name="links" id="vo"}
+                    <li><a href="{$vo.url}" target="_blank">{$vo.title}</a></li>
+                {/volist}
+                </ul>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="boxBor" onclick="IBoxBor()" style="cursor:pointer;"></div>
+        <input type="hidden" id="hdBoxbor" />
+    </div>
+<div class="sitemap">
+    <h4>
+        SITE MAP</h4>
+    <div class="l">
+        <ul id="menu-sitemap" class="menu">
+        {volist name="cates" id="vo" key="key"}
+        <li>
+            
+            <a href="http://qiye2.local/index/{if condition="$vo['type'] eq 1"}art_list{elseif condition="$vo['type'] eq 3"/}img_list{else/}page{/if}/index/cateid/{$vo.id}" {if condition="$vo.children"} class="havechild" {/if}>{$vo.catename}</a>
+            
+            {if condition="$vo.children"}
+            <ul>
+                {volist name="vo.children" id="vo2"}
+                <li><a href="http://qiye2.local/index/{if condition="$vo2['type'] eq 1"}art_list{elseif condition="$vo2['type'] eq 3"/}img_list{else/}page{/if}/index/cateid/{$vo2.id}">{$vo2.catename}</a></li>
+                {/volist}
+            </ul>
+             {/if}
+
+         </li>
+    {/volist}
+        </ul>
+    </div>
+    <div class="r">
+        <h5>
+            FOLLOW US</h5>
+        
+                        <img src="__STATIC__/home/images/weixin.jpg" alt="" title="扫描添加我们的公众微信" class="alignnone size-full wp-image-18966"
+                            height="140" width="120"></a></div>
+</div>
+{include file="public/footer"/}
+<div style="display: none;" id="scroll">
+</div>
+  
+{include file="public/base_js"/}
+
+<script>document.getElementById("life"+"").style.display="n"+"o"+"ne";</script>
+
+<script type="text/javascript">
+    function IFocuse(th, o) {
+        var t = $(th);
+        var c = t.attr("class");
+        if (o) {
+            t.removeClass(c).addClass(c+"-over");
+        }
+        else {
+            t.removeClass(c).addClass(c.replace("-over",""));
+        }
+    }
+</script>
+<script type="text/javascript">
+
+        $("#next-page").hover(function () { $(this).attr("src","__STATIC__/home/style/images/next02.png"); }, function () { $(this).attr("src", "__STATIC__/home/style/images/next01.png"); });
+        $("#last-page").hover(function () { $(this).attr("src", "__STATIC__/home/style/images/last02.png"); }, function () { $(this).attr("src","__STATIC__/home/style/images/last01.png"); });
+
+        $(function () {
+            var imgHoverSetTimeOut = null;
+            $('.xh_265x265 img').hover(function () {
+                var oPosition = $(this).offset();
+                var oThis = $(this);
+                $(".boxBor").css({
+                    left: oPosition.left,
+                    top: oPosition.top,
+                    width: oThis.width(),
+                    height: oThis.height()
+                });
+                $(".boxBor").show();
+                var urlText = $(this).parent().attr("href");
+                $("#hdBoxbor").val(urlText);
+            }, function () {
+                imgHoverSetTimeOut = setTimeout(function () { $(".boxBor").hide(); }, 500);
+            });
+            $(".boxBor").hover(
+                function () {
+                    clearTimeout(imgHoverSetTimeOut);
+                }
+                , function () {
+                    $(".boxBor").hide();
+                }
+            );
+            });
+            function IBoxBor() {
+                window.open($("#hdBoxbor").val());
+            }
+            function goanewurl() {
+                window.open($("#hdUrlFocus").val());
+            }
+</script>
+</body>
+</html>

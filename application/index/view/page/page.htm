@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>企业站点开发</title>
+<meta name="description" content="企业站点开发" />
+<meta name="keywords" content="企业站点开发" />
+<link rel="stylesheet" type="text/css" media="all" href="__STATIC__/home/style/style.css" />
+<link rel="stylesheet" href="__STATIC__/home/style/pagenavi-css.css" type="text/css" media="all" />
+<link rel="stylesheet" href="__STATIC__/home/style/votestyles.css" type="text/css" />
+<link rel="stylesheet" href="__STATIC__/home/style/voteitup.css" type="text/css" />
+    <style type="text/css">
+        #wrapper
+        {
+            background-color: #ffffff;
+        }
+        .single_entry{margin-top:30px;}
+    </style>
+</head>
+<body class="single2">
+
+<script type="text/javascript">
+    function showMask() {
+        $("#mask").css("height", $(document).height());
+        $("#mask").css("width", $(document).width());
+        $("#mask").show();
+    }  
+</script>
+<div id="mask" class="mask" onclick="CloseMask()"></div> 
+
+    {include file="public/menu"}
+    <div id="wrapper">
+       
+        <div class="single_entry page_entry">
+            <div class="entry">
+                <h2 style="margin: 0px 0px 20px; padding: 0px; border: 0px; font-size: 22px; vertical-align: baseline; font-family: 'Microsoft Yahei', 'Trebuchet MS', Arial, Tahoma, Helvetica, sans-serif; line-height: 26px; color: rgb(51, 51, 51);">
+            {volist name="position" id="vo"}
+                <a href="{:url('art_list/index',['cateid'=>$vo.id])}" style="color: black">{$vo.catename}</a> 
+            {/volist}
+    </h2>
+            {$cate.content}
+
+                <div class="clear">
+                </div>
+            </div>
+    </div>
+
+    </div>
+
+{include file="public/footer"}
+<div style="display: none;" id="scroll">
+</div>
+{include file="public/base_js"/}
+</body>
+</html>
